@@ -3,6 +3,7 @@
 import { Award, CheckCircle } from "lucide-react"
 import Container from "@/components/layout/Container"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 const partners = [
   {
@@ -90,9 +91,11 @@ const PartnersSection = () => {
               {/* Header Section */}
               <div className="bg-gray-900 rounded-t-2xl p-8 text-center border-b border-gray-100">
                 <div className="flex flex-col items-center">
-                  <img 
+                  <Image 
                     src="/images/partners/solvitech.png" 
                     alt="Solvitech Logo" 
+                    width={64}
+                    height={64}
                     className="h-16 w-auto mb-4"
                   />
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">
@@ -252,8 +255,7 @@ const PartnersSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-12"
-          >
+            className="mt-12">
             <div className="bg-gradient-to-r from-nature-green/5 to-clean-blue/5 rounded-xl p-8 border border-gray-200">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">

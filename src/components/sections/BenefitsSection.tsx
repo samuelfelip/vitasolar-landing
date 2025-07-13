@@ -10,43 +10,43 @@ const benefits = [
     icon: DollarSign,
     title: "Ahorros desde el primer mes",
     description: "Reduce tu factura eléctrica inmediatamente después de la instalación. Ahorra hasta 90% en tu consumo energético.",
-    color: "bg-gradient-to-br from-green-400 to-nature-green"
+    color: "#4ade80"
   },
   {
     icon: Leaf,
     title: "Proteges el planeta",
     description: "Contribuyes al cuidado del medio ambiente reduciendo tu huella de carbono y usando energía limpia y renovable.",
-    color: "bg-gradient-to-br from-blue-400 to-clean-blue"
+    color: "#60a5fa"
   },
   {
     icon: TrendingUp,
     title: "Inviertes en tu propiedad",
     description: "Aumentas el valor de tu inmueble significativamente. Los paneles solares son una inversión que se revaloriza.",
-    color: "bg-gradient-to-br from-yellow-300 to-solar-yellow"
+    color: "#fde047"
   },
   {
     icon: Shield,
     title: "Subes el valor de tu negocio u hogar",
     description: "Mejoras la valorización de tu propiedad con tecnología moderna y sustentable que atrae compradores.",
-    color: "bg-gradient-to-br from-purple-300 to-purple-700"
+    color: "#c4b5fd"
   },
   {
     icon: Zap,
     title: "¡No más aumentos en la factura eléctrica!",
     description: "Protégete de futuros aumentos en las tarifas eléctricas con tu propia generación de energía solar.",
-    color: "bg-gradient-to-br from-orange-300 to-red-600"
+    color: "#fdba74"
   },
   {
     icon: Settings,
     title: "Tecnología avanzada y confiable",
     description: "Paneles de última generación con inversores inteligentes y monitoreo en tiempo real de tu producción energética.",
-    color: "bg-gradient-to-br from-cyan-400 to-blue-600"
+    color: "#22d3ee"
   }
 ]
 
 const BenefitsSection = () => {
   return (
-    <section id="beneficios" className="py-20 bg-gradient-to-br from-smoke-white to-gray-50 relative" style={{ backgroundImage: "url('/images/landing page/5.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+    <section id="beneficios" className="py-20  bg-gradient-to-br from-smoke-white to-gray-50 relative" style={{ backgroundImage: "url('/images/landing page/5.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
       <div className="absolute inset-0 bg-gray-900/80"></div>
       <Container>
         <div className="max-w-6xl mx-auto relative z-10">
@@ -82,7 +82,10 @@ const BenefitsSection = () => {
                 <Card className="h-full hover:shadow-2xl transition-all duration-300 group-hover:scale-105 border border-white/20 bg-white/10 backdrop-blur-sm">
                   <div className="p-8 text-center">
                     <div className="mb-6">
-                      <div className={`w-16 h-16 ${benefit.color} rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <div 
+                        className="w-16 h-16 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg"
+                        style={{ backgroundColor: benefit.color }}
+                      >
                         <benefit.icon className="w-8 h-8 text-white" />
                       </div>
                     </div>
@@ -106,7 +109,7 @@ const BenefitsSection = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-16 text-center"
           >
-            <div className="bg-gradient-to-r from-solar-yellow to-nature-green rounded-2xl p-8 text-white shadow-2xl backdrop-blur-sm border border-white/20">
+            <div className="bg-solar-yellow to-nature-green rounded-2xl p-8 text-white shadow-2xl backdrop-blur-sm border border-white/20">
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
                 ¿Listo para comenzar a ahorrar?
               </h3>
@@ -138,7 +141,7 @@ const BenefitsSection = () => {
             transition={{ duration: 0.6, delay: 1.0 }}
             className="mt-12"
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/20 border-l-4 border-l-solar-yellow">
+           {/*  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/20 border-l-4 border-l-solar-yellow">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-solar-yellow rounded-full flex-shrink-0 shadow-lg"></div>
                 <div>
@@ -150,7 +153,7 @@ const BenefitsSection = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </Container>
