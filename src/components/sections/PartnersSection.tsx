@@ -1,8 +1,7 @@
 "use client"
 
-import { Star, Award, Wrench, Shield, CheckCircle } from "lucide-react"
+import { Award, CheckCircle } from "lucide-react"
 import Container from "@/components/layout/Container"
-import { Card } from "@/components/ui/Card"
 import { motion } from "framer-motion"
 
 const partners = [
@@ -42,12 +41,12 @@ const certifications = [
     description: "Todos nuestros aliados cuentan con certificaciones RETIE y estándares internacionales"
   },
   {
-    icon: Shield,
+    icon: Award,
     title: "Garantía Extendida",
     description: "25 años de garantía en paneles y 10 años en inversores con nuestros aliados"
   },
   {
-    icon: Wrench,
+    icon: CheckCircle,
     title: "Instalación Profesional",
     description: "Técnicos especializados con experiencia en sistemas solares residenciales y comerciales"
   },
@@ -71,10 +70,10 @@ const PartnersSection = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-graphite-gray mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               Nuestros aliados técnicos
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
               Contamos con aliados certificados que garantizan instalaciones seguras, rápidas y con garantía.
             </p>
           </motion.div>
@@ -87,88 +86,99 @@ const PartnersSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-16"
           >
-            <Card className="p-8 hover:shadow-xl transition-shadow duration-300 border-2 border-solar-yellow">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                {/* Partner Info */}
-                <div className="lg:col-span-1">
-                  <div className="text-center mb-6">
-                    <div className="text-6xl mb-4">{partners[0].logo}</div>
-                    <h3 className="text-2xl font-bold text-graphite-gray mb-2">
-                      {partners[0].name}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {partners[0].description}
-                    </p>
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100">
+              {/* Header Section */}
+              <div className="bg-gray-900 rounded-t-2xl p-8 text-center border-b border-gray-100">
+                <div className="flex flex-col items-center">
+                  <img 
+                    src="/images/partners/solvitech.png" 
+                    alt="Solvitech Logo" 
+                    className="h-16 w-auto mb-4"
+                  />
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    {partners[0].name}
+                  </h3>
+                  <p className="text-gray-600 max-w-md">
+                    {partners[0].description}
+                  </p>
+                </div>
+              </div>
+
+              {/* Stats Section */}
+              <div className="p-8 bg-white">
+                <div className="grid grid-cols-3 gap-8 text-center mb-8">
+                  <div className="p-4 bg-solar-yellow/10 rounded-xl">
+                    <div className="text-2xl font-bold text-gray-900 mb-1">
+                      {partners[0].experience}+
+                    </div>
+                    <div className="text-sm font-medium text-gray-600">Años de experiencia</div>
                   </div>
-                  
-                  {/* Stats */}
-                  <div className="grid grid-cols-3 gap-4 text-center">
-                    <div>
-                      <div className="text-2xl font-bold text-solar-yellow">
-                        {partners[0].experience}+
-                      </div>
-                      <div className="text-xs text-gray-600">Años</div>
+                  <div className="p-4 bg-nature-green/10 rounded-xl">
+                    <div className="text-2xl font-bold text-gray-900 mb-1">
+                      {partners[0].rating}
                     </div>
-                    <div>
-                      <div className="text-2xl font-bold text-nature-green">
-                        {partners[0].rating}
-                      </div>
-                      <div className="text-xs text-gray-600">Rating</div>
+                    <div className="text-sm font-medium text-gray-600">Rating promedio</div>
+                  </div>
+                  <div className="p-4 bg-clean-blue/10 rounded-xl">
+                    <div className="text-2xl font-bold text-gray-900 mb-1">
+                      {partners[0].completedProjects}+
                     </div>
-                    <div>
-                      <div className="text-2xl font-bold text-clean-blue">
-                        {partners[0].completedProjects}+
-                      </div>
-                      <div className="text-xs text-gray-600">Proyectos</div>
-                    </div>
+                    <div className="text-sm font-medium text-gray-600">Proyectos exitosos</div>
                   </div>
                 </div>
 
-                {/* Services */}
-                <div className="lg:col-span-1">
-                  <h4 className="text-lg font-bold text-graphite-gray mb-4">
-                    Servicios especializados
-                  </h4>
-                  <div className="space-y-3">
-                    {partners[0].services.map((service, index) => (
-                      <div key={index} className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-solar-yellow rounded-full flex-shrink-0"></div>
-                        <span className="text-gray-700">{service}</span>
+                {/* Content Grid */}
+                <div className="grid md:grid-cols-2 gap-8">
+                  {/* Left Column */}
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                        <div className="w-2 h-6 bg-solar-yellow rounded-full mr-3"></div>
+                        Servicios especializados
+                      </h4>
+                      <div className="space-y-3 pl-5">
+                        {partners[0].services.map((service, index) => (
+                          <div key={index} className="flex items-center space-x-3">
+                            <CheckCircle className="w-4 h-4 text-nature-green flex-shrink-0" />
+                            <span className="text-gray-700">{service}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    </div>
+
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                        <div className="w-2 h-6 bg-nature-green rounded-full mr-3"></div>
+                        Certificaciones
+                      </h4>
+                      <div className="space-y-3 pl-5">
+                        {partners[0].certifications.map((cert, index) => (
+                          <div key={index} className="flex items-center space-x-3">
+                            <Award className="w-4 h-4 text-clean-blue flex-shrink-0" />
+                            <span className="text-gray-700">{cert}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
 
-                  <h4 className="text-lg font-bold text-graphite-gray mb-4 mt-6">
-                    Certificaciones
-                  </h4>
-                  <div className="space-y-3">
-                    {partners[0].certifications.map((cert, index) => (
-                      <div key={index} className="flex items-center space-x-3">
-                        <Star className="w-4 h-4 text-solar-yellow flex-shrink-0" />
-                        <span className="text-gray-700">{cert}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Highlights */}
-                <div className="lg:col-span-1">
-                  <h4 className="text-lg font-bold text-graphite-gray mb-4">
-                    ¿Por qué elegir Solvitech?
-                  </h4>
-                  <div className="space-y-4">
-                    {partners[0].highlights.map((highlight, index) => (
-                      <div key={index} className="bg-solar-yellow/10 rounded-lg p-3">
-                        <div className="flex items-center space-x-3">
-                          <CheckCircle className="w-5 h-5 text-nature-green flex-shrink-0" />
-                          <span className="text-graphite-gray font-medium">{highlight}</span>
+                  {/* Right Column */}
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                      <div className="w-2 h-6 bg-clean-blue rounded-full mr-3"></div>
+                      ¿Por qué elegir Solvitech?
+                    </h4>
+                    <div className="space-y-4 pl-5">
+                      {partners[0].highlights.map((highlight, index) => (
+                        <div key={index} className="p-3 bg-gray-50 rounded-lg border-l-4 border-nature-green">
+                          <span className="text-gray-700 text-sm leading-relaxed">{highlight}</span>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
           </motion.div>
 
           {/* Certifications Grid */}
@@ -179,7 +189,7 @@ const PartnersSection = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-16"
           >
-            <h3 className="text-2xl font-bold text-graphite-gray text-center mb-12">
+            <h3 className="text-2xl font-bold text-gray-900 text-center mb-12">
               Estándares de calidad garantizados
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -191,17 +201,17 @@ const PartnersSection = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Card className="p-6 text-center h-full hover:shadow-lg transition-shadow duration-300">
-                    <div className="w-12 h-12 bg-solar-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                      <cert.icon className="w-6 h-6 text-graphite-gray" />
+                  <div className="bg-white rounded-xl border border-gray-200 p-6 text-center hover:shadow-md transition-all duration-300 hover:border-gray-300">
+                    <div className="w-14 h-14 bg-gradient-to-br from-solar-yellow/20 to-nature-green/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <cert.icon className="w-7 h-7 text-gray-700" />
                     </div>
-                    <h4 className="text-lg font-semibold text-graphite-gray mb-3">
+                    <h4 className="text-lg font-semibold text-gray-900 mb-3">
                       {cert.title}
                     </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-gray-600 leading-relaxed">
                       {cert.description}
                     </p>
-                  </Card>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -215,22 +225,22 @@ const PartnersSection = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-center"
           >
-            <div className="bg-gradient-to-r from-clean-blue to-nature-green rounded-2xl p-8 text-white">
-              <h3 className="text-2xl md:text-3xl font-bold mb-6">
+            <div className="bg-nature-green rounded-lg p-6">
+              <h3 className="text-xl font-medium text-white mb-6 text-center">
                 Instalación con los más altos estándares
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="space-y-2">
-                  <div className="text-3xl font-bold">RETIE</div>
-                  <div className="text-sm opacity-90">Certificación obligatoria</div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div>
+                  <div className="text-lg font-medium text-white">RETIE</div>
+                  <div className="text-sm text-white/80">Certificación obligatoria</div>
                 </div>
-                <div className="space-y-2">
-                  <div className="text-3xl font-bold">ISO 9001</div>
-                  <div className="text-sm opacity-90">Gestión de calidad</div>
+                <div>
+                  <div className="text-lg font-medium text-white">ISO 9001</div>
+                  <div className="text-sm text-white/80">Gestión de calidad</div>
                 </div>
-                <div className="space-y-2">
-                  <div className="text-3xl font-bold">25 años</div>
-                  <div className="text-sm opacity-90">Garantía total</div>
+                <div>
+                  <div className="text-lg font-medium text-white">25 años</div>
+                  <div className="text-sm text-white/80">Garantía total</div>
                 </div>
               </div>
             </div>
@@ -244,19 +254,26 @@ const PartnersSection = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-12"
           >
-            <div className="bg-white rounded-xl p-6 shadow-lg border-l-4 border-nature-green">
+            <div className="bg-gradient-to-r from-nature-green/5 to-clean-blue/5 rounded-xl p-8 border border-gray-200">
               <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="text-lg font-bold text-graphite-gray mb-2">
-                    🚀 Ampliando nuestra red de aliados
-                  </h4>
-                  <p className="text-gray-600">
-                    Constantemente evaluamos y agregamos nuevos aliados técnicos certificados 
-                    para brindarte el mejor servicio en todo Colombia.
-                  </p>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-nature-green rounded-xl flex items-center justify-center">
+                    <Award className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-gray-900 mb-1">
+                      Ampliando nuestra red de aliados
+                    </h4>
+                    <p className="text-gray-600">
+                      Constantemente evaluamos y agregamos nuevos aliados técnicos certificados 
+                      para brindarte el mejor servicio en todo Colombia.
+                    </p>
+                  </div>
                 </div>
-                <div className="hidden md:block">
-                  <Award className="w-16 h-16 text-nature-green" />
+                <div className="hidden lg:block">
+                  <div className="w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center">
+                    <span className="text-2xl">🚀</span>
+                  </div>
                 </div>
               </div>
             </div>

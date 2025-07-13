@@ -30,7 +30,7 @@ const HeroSection = () => {
   }
 
   return (
-    <section id="hero" className="min-h-screen flex items-center bg-smoke-white py-20">
+    <section id="hero" className="min-h-screen flex items-center bg-gray-900 py-20">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
@@ -194,15 +194,17 @@ const HeroSection = () => {
 
                   <button
                     type="submit"
-                    className="w-full px-6 py-4 bg-nature-green text-white font-bold text-lg rounded-xl hover:bg-solar-yellow hover:text-graphite-gray transition-all duration-300 hover:scale-105 shadow-lg border-2 border-gray-200"
-                    style={{ backgroundColor: '#43A047', color: '#FFFFFF' }}
+                    className="w-full px-6 py-4 bg-white text-nature-green font-bold text-lg rounded-xl hover:bg-solar-yellow hover:text-nature-green transition-all duration-300 hover:scale-105 shadow-lg border-2 border-white hover:border-solar-yellow"
+                    style={{ backgroundColor: '#FFFFFF', color: '#43A047' }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = '#FFD600'
                       e.currentTarget.style.color = '#43A047'
+                      e.currentTarget.style.borderColor = '#FFD600'
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#43A047'
-                      e.currentTarget.style.color = '#FFFFFF'
+                      e.currentTarget.style.backgroundColor = '#FFFFFF'
+                      e.currentTarget.style.color = '#43A047'
+                      e.currentTarget.style.borderColor = '#FFFFFF'
                     }}
                   >
                     Solicitar cotización gratuita
