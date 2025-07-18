@@ -9,7 +9,7 @@ const partners = [
   {
     id: "solvitech",
     name: "Solvitech",
-    logo: "🔧", // En producción sería una imagen real
+    logo: "/images/partners/solvitech.png",
     description: "Expertos en instalación de paneles solares con más de 10 años de experiencia",
     services: [
       "Instalación residencial",
@@ -91,17 +91,17 @@ const PartnersSection = () => {
               {/* Header Section */}
               <div className="bg-gray-900 rounded-t-2xl p-8 text-center border-b border-gray-100">
                 <div className="flex flex-col items-center">
-                  <Image 
+                  <Image
                     src="/images/partners/solvitech.png" 
                     alt="Solvitech Logo" 
-                    width={64}
-                    height={64}
                     className="h-16 w-auto mb-4"
+                    width={128}
+                    height={128}
                   />
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-2xl font-bold text-white mb-2">
                     {partners[0].name}
                   </h3>
-                  <p className="text-gray-600 max-w-md">
+                  <p className="text-gray-300 max-w-md">
                     {partners[0].description}
                   </p>
                 </div>
@@ -142,7 +142,7 @@ const PartnersSection = () => {
                       <div className="space-y-3 pl-5">
                         {partners[0].services.map((service, index) => (
                           <div key={index} className="flex items-center space-x-3">
-                            <CheckCircle className="w-4 h-4 text-nature-green flex-shrink-0" />
+                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
                             <span className="text-gray-700">{service}</span>
                           </div>
                         ))}
@@ -157,7 +157,7 @@ const PartnersSection = () => {
                       <div className="space-y-3 pl-5">
                         {partners[0].certifications.map((cert, index) => (
                           <div key={index} className="flex items-center space-x-3">
-                            <Award className="w-4 h-4 text-clean-blue flex-shrink-0" />
+                            <Award className="w-4 h-4 text-blue-600 flex-shrink-0" />
                             <span className="text-gray-700">{cert}</span>
                           </div>
                         ))}
@@ -206,7 +206,12 @@ const PartnersSection = () => {
                 >
                   <div className="bg-white rounded-xl border border-gray-200 p-6 text-center hover:shadow-md transition-all duration-300 hover:border-gray-300">
                     <div className="w-14 h-14 bg-gradient-to-br from-solar-yellow/20 to-nature-green/20 rounded-xl flex items-center justify-center mx-auto mb-4">
-                      <cert.icon className="w-7 h-7 text-gray-700" />
+                      <cert.icon className={`w-7 h-7 ${
+                        index === 0 ? 'text-yellow-600' :
+                        index === 1 ? 'text-green-600' : 
+                        index === 2 ? 'text-blue-600' :
+                        'text-purple-600'
+                      }`} />
                     </div>
                     <h4 className="text-lg font-semibold text-gray-900 mb-3">
                       {cert.title}
@@ -255,7 +260,8 @@ const PartnersSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-12">
+            className="mt-12"
+          >
             <div className="bg-gradient-to-r from-nature-green/5 to-clean-blue/5 rounded-xl p-8 border border-gray-200">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
