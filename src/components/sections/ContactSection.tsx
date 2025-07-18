@@ -15,18 +15,47 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  const [citySearch, setCitySearch] = useState("")
+  const [showCityDropdown, setShowCityDropdown] = useState(false)
+  const [selectedCity, setSelectedCity] = useState("")
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
+    setValue,
+    trigger // Añadimos trigger para validación manual
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema)
+    resolver: zodResolver(contactFormSchema),
+    mode: "onBlur" // Cambiamos el modo para validar al perder el foco
   })
+
+  // Filter cities based on search
+  const filteredCities = CITIES.filter(city =>
+    city.toLowerCase().includes(citySearch.toLowerCase())
+  )
+
+  const handleCitySelect = (city: string) => {
+    setSelectedCity(city)
+    setCitySearch(city)
+    setShowCityDropdown(false)
+    setValue("city", city)
+  }
 
   useEffect(() => {
     setIsMounted(true)
+    
+    // Close dropdown when clicking outside
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element
+      if (!target.closest('[data-city-dropdown]')) {
+        setShowCityDropdown(false)
+      }
+    }
+    
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   const onSubmit = async (data: ContactFormData) => {
@@ -66,8 +95,8 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
 
   if (isSubmitted) {
     return (
-      <section id="contacto" className="py-20 bg-gradient-to-br from-nature-green to-clean-blue relative" style={{ backgroundImage: "url('/images/landing page/3.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-        <div className="absolute inset-0 bg-gradient-to-br from-nature-green/90 to-clean-blue/90"></div>
+      <section id="contacto" className="py-20 bg-gradient-to-br from-green-500 to-blue-500 relative bg-[url('/images/landing page/3.png')] bg-cover bg-center bg-no-repeat">
+        <div className="absolute inset-0 bg-gradient-to-br from-green-500/90 to-blue-500/90"></div>
         <Container>
           <MotionDiv
             {...(isMounted && {
@@ -88,7 +117,7 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
             </div>
             <Card className="p-8 bg-white border-0 shadow-2xl">
                               <div className="text-center">
-                  <div className="w-20 h-20 bg-nature-green rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="w-10 h-10 text-white" />
                   </div>
                 <div className="space-y-3 text-sm text-graphite-gray/80">
@@ -117,8 +146,8 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
   }
 
   return (
-    <section id="contacto" className="py-20 bg-gradient-to-br from-nature-green to-clean-blue relative" style={{ backgroundImage: "url('/images/landing page/3.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-      <div className="absolute inset-0 bg-gradient-to-br from-nature-green/90 to-clean-blue/90"></div>
+    <section id="contacto" className="py-20 bg-gradient-to-br from-green-500 to-blue-500 relative bg-[url('/images/landing page/3.png')] bg-cover bg-center bg-no-repeat">
+      <div className="absolute inset-0 bg-gradient-to-br from-green-500/90 to-blue-500/90"></div>
       <Container>
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Header */}
@@ -156,7 +185,7 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                 <h3 className="text-2xl font-bold mb-6">Contáctanos</h3>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-nature-green rounded-full flex items-center justify-center shadow-lg">
+                    <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
                       <Phone className="w-5 h-5 text-white" />
                     </div>
                     <div>
@@ -165,7 +194,7 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-clean-blue rounded-full flex items-center justify-center shadow-lg">
+                    <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
                       <Mail className="w-5 h-5 text-white" />
                     </div>
                     <div>
@@ -174,7 +203,7 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-solar-yellow rounded-full flex items-center justify-center shadow-lg">
+                    <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
                       <MapPin className="w-5 h-5 text-white" />
                     </div>
                     <div>
@@ -230,17 +259,17 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
             >
               <Card className="p-8 bg-white border-0 shadow-2xl">
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" suppressHydrationWarning>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6" suppressHydrationWarning>
                     {/* Full Name */}
-                    <div>
-                      <label htmlFor="fullName" className="block text-sm font-medium text-graphite-gray mb-2" style={{ color: '#333333' }}>
+                    <div suppressHydrationWarning>
+                      <label htmlFor="fullName" className="block text-sm font-medium text-gray-900 mb-2">
                         Nombre completo *
                       </label>
                       <input
                         type="text"
                         id="fullName"
                         {...register("fullName")}
-                        className="w-full px-4 py-3 border-2 border-nature-green/50 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-yellow focus:border-solar-yellow placeholder:text-gray-500"
+                        className="w-full px-4 py-3 border-2 border-green-500/50 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder:text-gray-500 text-gray-900"
                         placeholder="Tu nombre completo"
                         suppressHydrationWarning
                       />
@@ -250,41 +279,63 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                     </div>
 
                     {/* City */}
-                    <div>
-                      <label htmlFor="city" className="block text-sm font-medium text-graphite-gray mb-2" style={{ color: '#333333' }}>
+                    <div className="relative" data-city-dropdown suppressHydrationWarning>
+                      <label htmlFor="city" className="block text-sm font-medium text-gray-900 mb-2">
                         Ciudad *
                       </label>
-                      <select
-                        id="city"
-                        {...register("city")}
-                        className="w-full px-4 py-3 border-2 border-nature-green/50 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-yellow focus:border-solar-yellow text-gray-700"
-                        style={{ color: '#6B7280' }}
+                      <input
+                        type="text"
+                        value={citySearch}
+                        onChange={(e) => {
+                          setCitySearch(e.target.value)
+                          setShowCityDropdown(true)
+                          setValue("city", e.target.value)
+                        }}
+                        onFocus={() => setShowCityDropdown(true)}
+                        className="w-full px-4 py-3 border-2 border-green-500/50 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder:text-gray-500 text-gray-900"
+                        placeholder="Busca tu ciudad..."
                         suppressHydrationWarning
-                      >
-                        <option value="" style={{ color: '#6B7280' }}>Selecciona tu ciudad</option>
-                        {CITIES.map((city) => (
-                          <option key={city} value={city}>
-                            {city}
-                          </option>
-                        ))}
-                      </select>
+                      />
+                      <input type="hidden" {...register("city")} />
+                      
+                      {showCityDropdown && filteredCities.length > 0 && (
+                        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-48 overflow-y-auto">
+                          {filteredCities.map((city) => (
+                            <button
+                              key={city}
+                              type="button"
+                              onClick={() => handleCitySelect(city)}
+                              className="w-full px-4 py-2 text-left text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                            >
+                              {city}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                      
+                      {showCityDropdown && filteredCities.length === 0 && citySearch && (
+                        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg p-4 text-gray-500 text-center">
+                          No se encontraron ciudades
+                        </div>
+                      )}
+                      
                       {errors.city && (
                         <p className="mt-1 text-sm text-red-600">{errors.city.message}</p>
                       )}
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6" suppressHydrationWarning>
                     {/* WhatsApp */}
-                    <div>
-                      <label htmlFor="whatsapp" className="block text-sm font-medium text-graphite-gray mb-2" style={{ color: '#333333' }}>
+                    <div suppressHydrationWarning>
+                      <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-900 mb-2">
                         WhatsApp *
                       </label>
                       <input
                         type="tel"
                         id="whatsapp"
                         {...register("whatsapp")}
-                        className="w-full px-4 py-3 border-2 border-nature-green/50 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-yellow focus:border-solar-yellow placeholder:text-gray-500"
+                        className="w-full px-4 py-3 border-2 border-green-500/50 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder:text-gray-500 text-gray-900"
                         placeholder="300 123 4567"
                         suppressHydrationWarning
                       />
@@ -294,14 +345,14 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                     </div>
 
                     {/* Monthly Bill */}
-                    <div>
-                      <label htmlFor="monthlyBill" className="block text-sm font-medium text-graphite-gray mb-2" style={{ color: '#333333' }}>
+                    <div suppressHydrationWarning>
+                      <label htmlFor="monthlyBill" className="block text-sm font-medium text-gray-900 mb-2">
                         Factura mensual de energía *
                       </label>
                       <select
                         id="monthlyBill"
                         {...register("monthlyBill")}
-                        className="w-full px-4 py-3 border-2 border-nature-green/50 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-yellow focus:border-solar-yellow text-gray-700"
+                        className="w-full px-4 py-3 border-2 border-green-500/50 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900"
                         style={{ color: '#6B7280' }}
                         suppressHydrationWarning
                       >
@@ -319,35 +370,35 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                   </div>
 
                   {/* Property Type */}
-                  <div>
-                    <label className="block text-sm font-medium text-graphite-gray mb-3" style={{ color: '#333333' }}>
+                  <div suppressHydrationWarning>
+                    <label className="block text-sm font-medium text-gray-900 mb-3">
                       Tipo de propiedad *
                     </label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <label className="flex items-center p-4 border-2 border-nature-green/50 rounded-md cursor-pointer hover:bg-smoke-white transition-colors">
+                      <label className="flex items-center p-4 border-2 border-green-500/50 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
                         <input
                           type="radio"
                           {...register("propertyType")}
                           value="residential"
-                          className="mr-3 text-solar-yellow focus:ring-solar-yellow"
+                          className="mr-3 text-yellow-500 focus:ring-yellow-500"
                           suppressHydrationWarning
                         />
                         <div>
-                          <div className="font-medium text-graphite-gray" style={{ color: '#333333' }}>🏠 Residencial</div>
-                          <div className="text-sm text-graphite-gray/80" style={{ color: '#333333' }}>Casa, apartamento, finca</div>
+                          <div className="font-medium text-gray-900">🏠 Residencial</div>
+                          <div className="text-sm text-gray-800">Casa, apartamento, finca</div>
                         </div>
                       </label>
-                      <label className="flex items-center p-4 border-2 border-nature-green/50 rounded-md cursor-pointer hover:bg-smoke-white transition-colors">
+                      <label className="flex items-center p-4 border-2 border-green-500/50 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
                         <input
                           type="radio"
                           {...register("propertyType")}
                           value="commercial"
-                          className="mr-3 text-solar-yellow focus:ring-solar-yellow"
+                          className="mr-3 text-yellow-500 focus:ring-yellow-500"
                           suppressHydrationWarning
                         />
                         <div>
-                          <div className="font-medium text-graphite-gray" style={{ color: '#333333' }}>🏢 Comercial</div>
-                          <div className="text-sm text-graphite-gray/80" style={{ color: '#333333' }}>Empresa, local, industria</div>
+                          <div className="font-medium text-gray-900">🏢 Comercial</div>
+                          <div className="text-sm text-gray-800">Empresa, local, industria</div>
                         </div>
                       </label>
                     </div>
@@ -357,33 +408,38 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                   </div>
 
                   {/* Email (Optional) */}
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-graphite-gray mb-2" style={{ color: '#333333' }}>
+                  <div suppressHydrationWarning>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-2">
                       Email (opcional)
                     </label>
                     <input
                       type="email"
                       id="email"
                       {...register("email")}
-                      className="w-full px-4 py-3 border-2 border-nature-green/50 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-yellow focus:border-solar-yellow placeholder:text-gray-500"
+                      className="w-full px-4 py-3 border-2 border-green-500/50 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder:text-gray-500 text-gray-900"
                       placeholder="tu@email.com"
+                      onBlur={() => trigger("email")}
                       suppressHydrationWarning
                     />
                     {errors.email && (
-                      <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.email.type === "invalid_string" 
+                          ? "El correo electrónico no es válido" 
+                          : "Por favor ingresa un correo electrónico"}
+                      </p>
                     )}
                   </div>
 
                   {/* Message (Optional) */}
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-graphite-gray mb-2" style={{ color: '#333333' }}>
+                  <div suppressHydrationWarning>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-2">
                       Mensaje adicional (opcional)
                     </label>
                     <textarea
                       id="message"
                       {...register("message")}
                       rows={3}
-                      className="w-full px-4 py-3 border-2 border-nature-green/50 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-yellow focus:border-solar-yellow resize-none placeholder:text-gray-500"
+                      className="w-full px-4 py-3 border-2 border-green-500/50 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 resize-none placeholder:text-gray-500 text-gray-900"
                       placeholder="Cuéntanos más sobre tu proyecto..."
                       suppressHydrationWarning
                     />
@@ -396,7 +452,7 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full px-6 py-3 bg-nature-green text-white font-bold rounded-xl hover:bg-solar-yellow transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                    className="w-full px-6 py-3 bg-green-500 text-white font-bold rounded-xl hover:bg-yellow-500 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                     style={{ backgroundColor: '#43A047' }}
                     onMouseEnter={(e) => {
                       if (!isSubmitting) {
@@ -419,7 +475,7 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                     )}
                   </button>
 
-                  <p className="text-xs text-graphite-gray/70 text-center" style={{ color: '#333333' }}>
+                  <p className="text-xs text-gray-800/70 text-center">
                     Al enviar este formulario, aceptas que te contactemos por WhatsApp para brindarte 
                     más información sobre nuestros servicios de energía solar.
                   </p>

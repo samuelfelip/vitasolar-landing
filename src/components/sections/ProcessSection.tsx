@@ -11,21 +11,21 @@ const steps = [
     title: "Contáctanos",
     description: "Llenas el formulario o hablas con un asesor. Te damos toda la información que necesitas sin compromiso.",
     icon: Phone,
-    color: "bg-solar-yellow"
+    color: "bg-yellow-500"
   },
   {
     number: 2,
     title: "Estudio técnico",
     description: "Nuestros aliados revisan tu consumo y viabilidad. Evaluamos tu techo, orientación y potencial solar.",
     icon: Search,
-    color: "bg-clean-blue"
+    color: "bg-blue-500"
   },
   {
     number: 3,
     title: "Cotización + financiación",
     description: "Recibes una propuesta clara y transparente. Te ayudamos a financiar con entidades aliadas si lo necesitas.",
     icon: Calculator,
-    color: "bg-nature-green"
+    color: "bg-green-500"
   },
   {
     number: 4,
@@ -45,7 +45,7 @@ const steps = [
 
 const ProcessSection = () => {
   return (
-    <section id="proceso" className="py-20 bg-gray-900 relative" style={{ backgroundImage: "url('/images/landing page/4.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+    <section id="proceso" className="py-20 bg-gray-900 relative bg-[url('/images/landing page/4.png')] bg-cover bg-center bg-no-repeat">
       <div className="absolute inset-0 bg-gray-900/85"></div>
       <Container>
         <div className="max-w-6xl mx-auto relative z-10">
@@ -58,9 +58,9 @@ const ProcessSection = () => {
             className="text-center mb-16"
           >
             <div className="bg-white/10 rounded-lg p-6 backdrop-blur-sm max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
                 ¿Cómo funciona el proceso?
-              </h2>
+              </h1>
               <p className="text-xl text-white/80 leading-relaxed">
                 Te acompañamos paso a paso desde tu primera consulta hasta que empieces a ahorrar con energía solar
               </p>
@@ -89,7 +89,7 @@ const ProcessSection = () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-4">
-                            <span className="text-2xl font-bold text-solar-yellow">
+                            <span className="text-2xl font-bold text-yellow-500">
                               {step.number}
                             </span>
                             <h3 className="text-2xl font-bold text-white">
@@ -107,7 +107,7 @@ const ProcessSection = () => {
                   {/* Step Number Visual */}
                   <div className="flex-shrink-0">
                     <div className="relative">
-                      <div className="w-24 h-24 bg-gradient-to-br from-solar-yellow to-nature-green rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20">
+                      <div className="w-24 h-24 bg-gradient-to-br from-yellow-500 to-green-500 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20">
                         <span className="text-3xl font-bold text-white">
                           {step.number}
                         </span>
@@ -115,7 +115,7 @@ const ProcessSection = () => {
                       {/* Arrow to next step */}
                       {index < steps.length - 1 && (
                         <div className="hidden lg:block absolute top-full left-1/2 transform -translate-x-1/2 mt-4">
-                          <div className="w-1 h-16 bg-gradient-to-b from-solar-yellow via-nature-green to-clean-blue rounded-full"></div>
+                          <div className="w-1 h-16 bg-gradient-to-b from-yellow-500 via-green-500 to-blue-500 rounded-full"></div>
                         </div>
                       )}
                     </div>
@@ -167,15 +167,15 @@ const ProcessSection = () => {
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-white/20 hover:bg-white/20 transition-all duration-300">
-                <div className="text-2xl font-bold text-solar-yellow mb-2">100%</div>
+                <div className="text-2xl font-bold text-yellow-500 mb-2">100%</div>
                 <div className="text-white/80">Instalaciones exitosas</div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-white/20 hover:bg-white/20 transition-all duration-300">
-                <div className="text-2xl font-bold text-nature-green mb-2">25 años</div>
+                <div className="text-2xl font-bold text-green-500 mb-2">25 años</div>
                 <div className="text-white/80">Garantía en paneles</div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-white/20 hover:bg-white/20 transition-all duration-300">
-                <div className="text-2xl font-bold text-clean-blue mb-2">24/7</div>
+                <div className="text-2xl font-bold text-blue-500 mb-2">24/7</div>
                 <div className="text-white/80">Soporte técnico</div>
               </div>
             </div>

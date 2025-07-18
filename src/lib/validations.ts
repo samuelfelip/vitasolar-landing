@@ -14,9 +14,10 @@ export const contactFormSchema = z.object({
     message: "Por favor selecciona tu rango de factura mensual."
   }),
   propertyType: z.enum(["residential", "commercial"]),
-  email: z.string().email({
-    message: "Por favor ingresa un email válido."
-  }).optional(),
+  email: z.string()
+    .min(1, "Por favor ingresa un correo electrónico")
+    .email("El correo electrónico no es válido")
+    .optional(),
   message: z.string().max(500, {
     message: "El mensaje no puede exceder 500 caracteres."
   }).optional()
@@ -118,7 +119,7 @@ export const CITIES = [
   "Santa Marta",
   "Sincelejo",
   "Riohacha",
-  "Otras"
+  "Otra..."
 ] as const
 
 export const MONTHLY_BILL_RANGES = [

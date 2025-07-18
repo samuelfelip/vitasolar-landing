@@ -114,7 +114,7 @@ const HeroSection = () => {
                   </p>
                 </div>
 
-                <form onSubmit={handleQuoteSubmit} className="space-y-4">
+                <form onSubmit={handleQuoteSubmit} className="space-y-4" suppressHydrationWarning={true}>
                   <div>
                     <label htmlFor="name" className="block text-sm font-bold text-white mb-2" style={{ color: '#FFFFFF' }}>
                       Nombre completo
