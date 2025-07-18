@@ -17,7 +17,6 @@ const ContactSection = () => {
   const [isMounted, setIsMounted] = useState(false)
   const [citySearch, setCitySearch] = useState("")
   const [showCityDropdown, setShowCityDropdown] = useState(false)
-  const [selectedCity, setSelectedCity] = useState("")
 
   const {
     register,
@@ -37,7 +36,6 @@ const ContactSection = () => {
   )
 
   const handleCitySelect = (city: string) => {
-    setSelectedCity(city)
     setCitySearch(city)
     setShowCityDropdown(false)
     setValue("city", city)
