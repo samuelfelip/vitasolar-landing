@@ -89,7 +89,7 @@ const PartnersSection = () => {
           >
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100">
               {/* Header Section */}
-              <div className="bg-gray-900 rounded-t-2xl p-8 text-center border-b border-gray-100">
+              <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-t-2xl p-8 text-center border-b border-gray-100">
                 <div className="flex flex-col items-center">
                   <Image
                     src="/images/partners/solvitech.png" 
@@ -108,13 +108,13 @@ const PartnersSection = () => {
               </div>
 
               {/* Stats Section */}
-              <div className="p-8 bg-white">
-                <div className="grid grid-cols-3 gap-8 text-center mb-8">
-                  <div className="p-4 bg-solar-yellow/10 rounded-xl">
-                    <div className="text-2xl font-bold text-gray-900 mb-1">
+              <div className="p-4 sm:p-6 lg:p-8 bg-white">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-8 text-center mb-6 lg:mb-8">
+                  <div className="p-3 lg:p-4 bg-yellow-500/10 rounded-xl">
+                    <div className="text-xl lg:text-2xl font-bold text-gray-900 mb-1">
                       {partners[0].experience}+
                     </div>
-                    <div className="text-sm font-medium text-gray-600">Años de experiencia</div>
+                    <div className="text-xs sm:text-sm font-medium text-gray-600">Años de experiencia</div>
                   </div>
                   <div className="p-4 bg-nature-green/10 rounded-xl">
                     <div className="text-2xl font-bold text-gray-900 mb-1">
@@ -131,19 +131,19 @@ const PartnersSection = () => {
                 </div>
 
                 {/* Content Grid */}
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                   {/* Left Column */}
-                  <div className="space-y-6">
+                  <div className="space-y-4 lg:space-y-6">
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                        <div className="w-2 h-6 bg-solar-yellow rounded-full mr-3"></div>
+                      <h4 className="text-base lg:text-lg font-semibold text-gray-900 mb-3 lg:mb-4 flex items-center">
+                        <div className="w-2 h-4 lg:h-6 bg-yellow-500 rounded-full mr-3"></div>
                         Servicios especializados
                       </h4>
-                      <div className="space-y-3 pl-5">
+                      <div className="space-y-2 lg:space-y-3 pl-5">
                         {partners[0].services.map((service, index) => (
                           <div key={index} className="flex items-center space-x-3">
-                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
-                            <span className="text-gray-700">{service}</span>
+                            <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 flex-shrink-0" />
+                            <span className="text-sm sm:text-base text-gray-700">{service}</span>
                           </div>
                         ))}
                       </div>

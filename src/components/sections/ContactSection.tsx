@@ -168,7 +168,7 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
             </div>
           </MotionDiv>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
             {/* Contact Info */}
             <MotionDiv
               {...(isMounted && {
@@ -177,18 +177,19 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                 viewport: { once: true },
                 transition: { duration: 0.6 }
               })}
-              className="space-y-6"
+              className="xl:col-span-1 space-y-4 lg:space-y-6"
             >
-              <div className="text-white bg-white/10 rounded-lg p-6 backdrop-blur-sm">
-                <h3 className="text-2xl font-bold mb-6">Contáctanos</h3>
-                <div className="space-y-4">
+              <div className="text-white bg-white/10 rounded-lg p-4 sm:p-6 backdrop-blur-sm">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 lg:mb-6">Contáctanos</h3>
+                <div className="space-y-3 lg:space-y-4">
+                  {/* Contact items with responsive spacing */}
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
-                      <Phone className="w-5 h-5 text-white" />
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </div>
                     <div>
-                      <div className="font-medium">WhatsApp</div>
-                      <div className="text-white/80">+57 300 123 4567</div>
+                      <div className="font-medium text-sm sm:text-base">WhatsApp</div>
+                      <div className="text-white/80 text-sm sm:text-base">+57 300 123 4567</div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -221,10 +222,10 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                 </div>
               </div>
 
-              {/* Benefits Reminder */}
-              <div className="bg-white/10 rounded-lg p-6 backdrop-blur-sm">
-                <h4 className="text-white font-bold mb-4">¿Por qué elegir VitaSolar?</h4>
-                <div className="space-y-2 text-sm text-white/90">
+              {/* Benefits Reminder - responsive */}
+              <div className="bg-white/10 rounded-lg p-4 sm:p-6 backdrop-blur-sm">
+                <h4 className="text-white font-bold mb-3 lg:mb-4 text-sm sm:text-base">¿Por qué elegir VitaSolar?</h4>
+                <div className="space-y-2 text-xs sm:text-sm text-white/90">
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-4 h-4" />
                     <span>Evaluación 100% gratuita</span>
@@ -253,21 +254,21 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                 viewport: { once: true },
                 transition: { duration: 0.6 }
               })}
-              className="lg:col-span-2"
+              className="xl:col-span-2"
             >
-              <Card className="p-8 bg-white border-0 shadow-2xl">
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" suppressHydrationWarning>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6" suppressHydrationWarning>
-                    {/* Full Name */}
+              <Card className="p-4 sm:p-6 lg:p-8 bg-white border-0 shadow-2xl">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 lg:space-y-6" suppressHydrationWarning>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6" suppressHydrationWarning>
+                    {/* Form fields with responsive sizing */}
                     <div suppressHydrationWarning>
-                      <label htmlFor="fullName" className="block text-sm font-medium text-gray-900 mb-2">
+                      <label className="block text-sm font-medium text-gray-900 mb-2">
                         Nombre completo *
                       </label>
                       <input
                         type="text"
                         id="fullName"
                         {...register("fullName")}
-                        className="w-full px-4 py-3 border-2 border-green-500/50 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder:text-gray-500 text-gray-900"
+                        className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-green-500/50 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder:text-gray-500 text-gray-900"
                         placeholder="Tu nombre completo"
                         suppressHydrationWarning
                       />

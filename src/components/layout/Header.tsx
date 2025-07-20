@@ -15,28 +15,42 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   { label: "Inicio", href: "#hero" },
-  { label: "Beneficios", href: "#beneficios" },
   { label: "Nosotros", href: "#about" },
-  { label: "Contáctanos", href: "#contacto" },
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "Aliados", href: "#aliados" },
+  { label: "Proceso", href: "#proceso" },
+  { label: "Contacto", href: "#contacto" },
   { label: "Ubicación", href: "#ubicacion" }
 ]
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isOverVideo, setIsOverVideo] = useState(false)
+  const [activeSection, setActiveSection] = useState("")
 
   useEffect(() => {
     const handleScroll = () => {
       // Detectar si el header está sobre el componente de video
-      // Asumiendo que el video tiene una altura aproximada de 100vh
       const scrollPosition = window.scrollY
-      const videoHeight = window.innerHeight // Aproximadamente la altura del video
-      
+      const videoHeight = window.innerHeight
       setIsOverVideo(scrollPosition < videoHeight)
+
+      // Detectar sección activa
+      const sections = menuItems.map(item => item.href.replace("#", ""))
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
     }
 
     window.addEventListener('scroll', handleScroll)
-    handleScroll() // Ejecutar una vez al montar
+    handleScroll()
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -49,12 +63,13 @@ const Header = () => {
     const sectionId = href.replace("#", "")
     scrollToSection(sectionId)
     setIsMenuOpen(false)
+    setActiveSection(sectionId)
   }
 
   return (
     <header 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 backdrop-blur-md shadow-lg border-b border-nature-green/20 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 backdrop-blur-md shadow-lg border-b border-green-500/20 transition-all duration-300",
         isOverVideo ? "bg-white/30" : "bg-white/95"
       )}
     >
@@ -72,26 +87,31 @@ const Header = () => {
               />
             </div>
             <div>
-              <span className="text-2xl font-bold text-nature-green hover:text-solar-yellow transition-colors duration-300 cursor-pointer" style={{ color: '#43A047' }}>
+              <span className="text-2xl font-bold text-green-600 hover:text-yellow-500 transition-colors duration-300 cursor-pointer">
                 VitaSolar
               </span>
-              <p className="text-xs font-medium" style={{ color: '#43A047' }}>
+              <p className="text-sm font-medium text-green-600">
                 Energía Solar Colombia
               </p>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
             {menuItems.map((item) => (
               <button
                 key={item.label}
                 onClick={() => handleMenuClick(item.href)}
-                className="text-nature-green hover:text-solar-yellow transition-all duration-300 font-semibold relative group hover:scale-105"
-                style={{ color: '#43A047' }}
+                className={cn(
+                  "text-gray-700 hover:text-green-600 transition-all duration-300 font-medium relative group px-2 py-1",
+                  activeSection === item.href.replace("#", "") && "text-green-600 font-semibold"
+                )}
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-nature-green group-hover:bg-solar-yellow transition-all duration-300 group-hover:w-full" style={{ backgroundColor: '#43A047' }}></span>
+                <span className={cn(
+                  "absolute -bottom-1 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full",
+                  activeSection === item.href.replace("#", "") && "w-full"
+                )}></span>
               </button>
             ))}
           </nav>
@@ -100,16 +120,7 @@ const Header = () => {
           <div className="hidden md:block">
             <button
               onClick={() => handleMenuClick("#contacto")}
-              className="px-6 py-3 bg-nature-green text-white font-bold rounded-xl hover:bg-solar-yellow transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-              style={{ backgroundColor: '#43A047' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#FFD600'
-                e.currentTarget.style.color = '#43A047'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#43A047'
-                e.currentTarget.style.color = 'white'
-              }}
+              className="px-6 py-3 bg-green-500 text-white font-bold rounded-xl hover:bg-yellow-500 hover:text-green-900 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl text-sm"
             >
               Cotiza ahora
             </button>
@@ -117,8 +128,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-xl text-nature-green hover:text-solar-yellow hover:bg-nature-green/10 transition-all duration-300 hover:scale-110"
-            style={{ color: '#43A047' }}
+            className="md:hidden p-2 rounded-xl text-green-600 hover:text-yellow-500 hover:bg-green-50 transition-all duration-300"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -130,34 +140,27 @@ const Header = () => {
         <div
           className={cn(
             "md:hidden transition-all duration-300 ease-in-out overflow-hidden",
-            isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            isMenuOpen ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"
           )}
         >
-          <nav className="py-4 border-t border-nature-green/20 bg-white/90 rounded-b-xl">
-            <div className="flex flex-col space-y-3">
+          <nav className="py-4 border-t border-green-500/20 bg-white/90 rounded-b-xl">
+            <div className="flex flex-col space-y-1">
               {menuItems.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => handleMenuClick(item.href)}
-                  className="text-left py-3 px-4 text-nature-green hover:text-solar-yellow hover:bg-nature-green/10 transition-all duration-300 font-semibold rounded-lg hover:scale-105 hover:translate-x-2"
-                  style={{ color: '#43A047' }}
+                  className={cn(
+                    "text-left py-3 px-4 text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 font-medium rounded-lg",
+                    activeSection === item.href.replace("#", "") && "text-green-600 bg-green-50/50 font-semibold"
+                  )}
                 >
                   {item.label}
                 </button>
               ))}
-              <div className="pt-4 border-t border-nature-green/20">
+              <div className="pt-4 px-4 mt-2 border-t border-green-500/20">
                 <button
                   onClick={() => handleMenuClick("#contacto")}
-                  className="w-full py-3 px-4 bg-nature-green text-white font-bold rounded-xl hover:bg-solar-yellow transition-all duration-300 hover:scale-105"
-                  style={{ backgroundColor: '#43A047' }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#FFD600'
-                    e.currentTarget.style.color = '#43A047'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#43A047'
-                    e.currentTarget.style.color = 'white'
-                  }}
+                  className="w-full py-3 px-4 bg-green-500 text-white font-bold rounded-xl hover:bg-yellow-500 hover:text-green-900 transition-all duration-300 hover:scale-105 text-sm"
                 >
                   Cotiza ahora
                 </button>

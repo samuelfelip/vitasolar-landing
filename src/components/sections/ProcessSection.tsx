@@ -45,7 +45,7 @@ const steps = [
 
 const ProcessSection = () => {
   return (
-    <section id="proceso" className="py-20 bg-gray-900 relative bg-[url('/images/landing page/4.png')] bg-cover bg-center bg-no-repeat">
+    <section id="proceso" className="py-20 bg-gradient-to-br from-gray-800 to-gray-900 relative bg-[url('/images/landing page/4.png')] bg-cover bg-center bg-no-repeat">
       <div className="absolute inset-0 bg-gray-900/85"></div>
       <Container>
         <div className="max-w-6xl mx-auto relative z-10">
@@ -68,7 +68,7 @@ const ProcessSection = () => {
           </motion.div>
 
           {/* Steps */}
-          <div className="space-y-8">
+          <div className="space-y-6 lg:space-y-8">
             {steps.map((step, index) => (
               <motion.div
                 key={index}
@@ -77,26 +77,23 @@ const ProcessSection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
               >
-                <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-8`}>
+                <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-6 lg:gap-8`}>
                   {/* Content */}
-                  <div className="flex-1">
-                    <Card className="p-8 h-full hover:shadow-xl transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm border border-white/10">
-                      <div className="flex items-start space-x-6">
-                        <div className="flex-shrink-0">
-                          <div className={`w-16 h-16 ${step.color} rounded-full flex items-center justify-center shadow-lg`}>
-                            <step.icon className="w-8 h-8 text-white" />
+                  <div className="flex-1 w-full">
+                    <Card className="p-4 sm:p-6 lg:p-8 h-full hover:shadow-xl transition-all duration-300 hover:scale-105 bg-white/5 backdrop-blur-sm border border-white/10">
+                      <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                        <div className="flex-shrink-0 mx-auto sm:mx-0">
+                          <div className={`w-12 h-12 sm:w-16 sm:h-16 ${step.color} rounded-full flex items-center justify-center shadow-lg`}>
+                            <step.icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                           </div>
                         </div>
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-3 mb-4">
-                            <span className="text-2xl font-bold text-yellow-500">
-                              {step.number}
-                            </span>
-                            <h3 className="text-2xl font-bold text-white">
+                        <div className="flex-1 text-center sm:text-left">
+                          <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-2 sm:space-y-0 sm:space-x-3 mb-3 lg:mb-4">
+                            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white">
                               {step.title}
                             </h3>
                           </div>
-                          <p className="text-white/80 text-lg leading-relaxed">
+                          <p className="text-white/80 text-sm sm:text-base lg:text-lg leading-relaxed">
                             {step.description}
                           </p>
                         </div>
@@ -105,17 +102,17 @@ const ProcessSection = () => {
                   </div>
 
                   {/* Step Number Visual */}
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 order-first lg:order-none">
                     <div className="relative">
-                      <div className="w-24 h-24 bg-gradient-to-br from-yellow-500 to-green-500 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20">
-                        <span className="text-3xl font-bold text-white">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-yellow-500 to-green-500 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20">
+                        <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
                           {step.number}
                         </span>
                       </div>
-                      {/* Arrow to next step */}
+                      {/* Arrow - hidden on mobile */}
                       {index < steps.length - 1 && (
                         <div className="hidden lg:block absolute top-full left-1/2 transform -translate-x-1/2 mt-4">
-                          <div className="w-1 h-16 bg-gradient-to-b from-yellow-500 via-green-500 to-blue-500 rounded-full"></div>
+                          <div className="w-1 h-12 lg:h-16 bg-gradient-to-b from-yellow-500 via-green-500 to-blue-500 rounded-full"></div>
                         </div>
                       )}
                     </div>

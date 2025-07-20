@@ -82,7 +82,7 @@ const ImageCarousel = () => {
   }
 
   return (
-    <section id="beneficios" className="relative h-[600px] md:h-[700px] overflow-hidden bg-graphite-gray">
+    <section id="carrusel" className="relative h-[600px] md:h-[700px] overflow-hidden bg-graphite-gray">
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
           <motion.div
@@ -116,61 +116,63 @@ const ImageCarousel = () => {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-4xl"
+            className="max-w-4xl w-full mx-4"
           >
-            <motion.h2 
-              className="text-4xl md:text-6xl font-bold mb-6"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              {carouselImages[currentIndex].title}
-            </motion.h2>
-            <motion.p 
-              className="text-xl md:text-2xl mb-8 opacity-90"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-            >
-              {carouselImages[currentIndex].subtitle}
-            </motion.p>
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <button 
-                onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-nature-green text-white font-bold text-lg rounded-xl hover:bg-solar-yellow transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-                style={{ backgroundColor: '#43A047' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#FFD600'
-                  e.currentTarget.style.color = '#43A047'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#43A047'
-                  e.currentTarget.style.color = 'white'
-                }}
+            <div className="bg-black/25 backdrop-blur-[1px] p-8 rounded-2xl">
+              <motion.h2 
+                className="text-4xl md:text-6xl font-bold mb-6"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
               >
-                Cotizar ahora
-              </button>
-              <button 
-                onClick={() => document.getElementById('calculadora')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-nature-green transition-all duration-300 hover:scale-105"
-                style={{ borderColor: 'white' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'white'
-                  e.currentTarget.style.color = '#43A047'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent'
-                  e.currentTarget.style.color = 'white'
-                }}
+                {carouselImages[currentIndex].title}
+              </motion.h2>
+              <motion.p 
+                className="text-xl md:text-2xl mb-8 opacity-90"
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
               >
-                Calcular ahorro
-              </button>
-            </motion.div>
+                {carouselImages[currentIndex].subtitle}
+              </motion.p>
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <button 
+                  onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="px-8 py-4 bg-nature-green text-white font-bold text-lg rounded-xl hover:bg-solar-yellow transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                  style={{ backgroundColor: '#43A047' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#FFD600'
+                    e.currentTarget.style.color = '#43A047'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#43A047'
+                    e.currentTarget.style.color = 'white'
+                  }}
+                >
+                  Cotizar ahora
+                </button>
+                <button 
+                  onClick={() => document.getElementById('calculadora')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-nature-green transition-all duration-300 hover:scale-105"
+                  style={{ borderColor: 'white' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'white'
+                    e.currentTarget.style.color = '#43A047'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                    e.currentTarget.style.color = 'white'
+                  }}
+                >
+                  Calcular ahorro
+                </button>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </Container>
@@ -179,7 +181,7 @@ const ImageCarousel = () => {
       <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-20">
         <button
           onClick={goToPrevious}
-          className="p-3 bg-white/20 hover:bg-white/30 rounded-full text-white backdrop-blur-sm transition-all duration-300 hover:scale-110"
+          className="p-3 bg-white/20 hover:bg-white/30 rounded-full text-white backdrop-blur-[1px] transition-all duration-300 hover:scale-110"
           aria-label="Imagen anterior"
         >
           <ChevronLeft className="w-6 h-6" />
@@ -189,7 +191,7 @@ const ImageCarousel = () => {
       <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-20">
         <button
           onClick={goToNext}
-          className="p-3 bg-white/20 hover:bg-white/30 rounded-full text-white backdrop-blur-sm transition-all duration-300 hover:scale-110"
+          className="p-3 bg-white/20 hover:bg-white/30 rounded-full text-white backdrop-blur-[1px] transition-all duration-300 hover:scale-110"
           aria-label="Siguiente imagen"
         >
           <ChevronRight className="w-6 h-6" />
@@ -218,7 +220,7 @@ const ImageCarousel = () => {
       <div className="absolute bottom-8 right-8 z-20">
         <button
           onClick={toggleAutoPlay}
-          className={`p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110 ${
+          className={`p-3 rounded-full backdrop-blur-[1px] transition-all duration-300 hover:scale-110 ${
             isAutoPlay 
               ? 'bg-solar-yellow/80 text-graphite-gray' 
               : 'bg-white/20 text-white'
