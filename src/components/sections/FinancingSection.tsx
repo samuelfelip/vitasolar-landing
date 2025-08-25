@@ -56,7 +56,7 @@ const partners = [
 const FinancingSection = () => {
   const handleFinancingContact = () => {
     const message = "Hola, quiero información sobre las opciones de financiamiento para paneles solares de VitaSolar"
-    const whatsappLink = generateWhatsAppLink("+57 300 123 4567", message)
+    const whatsappLink = generateWhatsAppLink("+57 300 344 0025", message)
     window.open(whatsappLink, "_blank")
   }
 

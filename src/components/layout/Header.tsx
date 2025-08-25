@@ -19,8 +19,7 @@ const menuItems: MenuItem[] = [
   { label: "Beneficios", href: "#beneficios" },
   { label: "Aliados", href: "#aliados" },
   { label: "Proceso", href: "#proceso" },
-  { label: "Contacto", href: "#contacto" },
-  { label: "Ubicación", href: "#ubicacion" }
+  { label: "Contacto", href: "#contacto" }
 ]
 
 const Header = () => {
@@ -103,7 +102,7 @@ const Header = () => {
                 key={item.label}
                 onClick={() => handleMenuClick(item.href)}
                 className={cn(
-                  "text-gray-700 hover:text-green-600 transition-all duration-300 font-medium relative group px-2 py-1",
+                  "text-gray-700 hover:text-green-600 transition-all duration-300 font-medium relative group px-2 py-1 cursor-pointer",
                   activeSection === item.href.replace("#", "") && "text-green-600 font-semibold"
                 )}
               >
@@ -120,7 +119,7 @@ const Header = () => {
           <div className="hidden md:block">
             <button
               onClick={() => handleMenuClick("#contacto")}
-              className="px-6 py-3 bg-green-500 text-white font-bold rounded-xl hover:bg-yellow-500 hover:text-green-900 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl text-sm"
+              className="px-6 py-3 bg-green-500 text-white font-bold rounded-xl hover:bg-yellow-500 hover:text-green-900 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl text-sm cursor-pointer"
             >
               Cotiza ahora
             </button>
@@ -128,7 +127,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-xl text-green-600 hover:text-yellow-500 hover:bg-green-50 transition-all duration-300"
+            className="md:hidden p-2 rounded-xl text-green-600 hover:text-yellow-500 hover:bg-green-50 transition-all duration-300 cursor-pointer"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -150,7 +149,7 @@ const Header = () => {
                   key={item.label}
                   onClick={() => handleMenuClick(item.href)}
                   className={cn(
-                    "text-left py-3 px-4 text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 font-medium rounded-lg",
+                    "text-left py-3 px-4 text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-300 font-medium rounded-lg cursor-pointer",
                     activeSection === item.href.replace("#", "") && "text-green-600 bg-green-50/50 font-semibold"
                   )}
                 >
@@ -160,7 +159,7 @@ const Header = () => {
               <div className="pt-4 px-4 mt-2 border-t border-green-500/20">
                 <button
                   onClick={() => handleMenuClick("#contacto")}
-                  className="w-full py-3 px-4 bg-green-500 text-white font-bold rounded-xl hover:bg-yellow-500 hover:text-green-900 transition-all duration-300 hover:scale-105 text-sm"
+                  className="w-full py-3 px-4 bg-green-500 text-white font-bold rounded-xl hover:bg-yellow-500 hover:text-green-900 transition-all duration-300 hover:scale-105 text-sm cursor-pointer"
                 >
                   Cotiza ahora
                 </button>

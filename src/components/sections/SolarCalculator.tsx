@@ -97,7 +97,7 @@ const SolarCalculator = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handleInputChange('city', city.name)}
-                  className={`p-4 rounded-xl border-2 transition-all duration-300 ${
+                  className={`p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer ${
                     formData.city === city.name
                       ? 'border-solar-yellow bg-solar-yellow/10'
                       : 'border-gray-200 hover:border-solar-yellow'
@@ -131,7 +131,7 @@ const SolarCalculator = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleInputChange('propertyType', 'residential')}
-                className={`p-6 rounded-xl border-2 transition-all duration-300 ${
+                className={`p-6 rounded-xl border-2 transition-all duration-300 cursor-pointer ${
                   formData.propertyType === 'residential'
                     ? 'border-solar-yellow bg-solar-yellow/10'
                     : 'border-gray-200 hover:border-solar-yellow'
@@ -148,7 +148,7 @@ const SolarCalculator = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleInputChange('propertyType', 'commercial')}
-                className={`p-6 rounded-xl border-2 transition-all duration-300 ${
+                className={`p-6 rounded-xl border-2 transition-all duration-300 cursor-pointer ${
                   formData.propertyType === 'commercial'
                     ? 'border-solar-yellow bg-solar-yellow/10'
                     : 'border-gray-200 hover:border-solar-yellow'
@@ -415,7 +415,7 @@ const SolarCalculator = () => {
                         Calcular otra vez
                       </Button>
                       <Button
-                        onClick={() => window.open(`https://wa.me/573001234567?text=¡Hola! Acabo de usar la calculadora solar y me interesa saber más. Mi ahorro estimado es de ${formatCurrency(results?.monthlySavings || 0)} mensuales.`, '_blank')}
+                        onClick={() => window.open(`https://wa.me/573003440025?text=¡Hola! Acabo de usar la calculadora solar y me interesa saber más. Mi ahorro estimado es de ${formatCurrency(results?.monthlySavings || 0)} mensuales.`, '_blank')}
                         variant="primary"
                         className="px-6 py-3"
                       >

@@ -1,6 +1,6 @@
 "use client"
 
-import { Phone, X } from "lucide-react"
+import { X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
 import { sendWhatsAppMessage } from "@/lib/utils"
@@ -29,9 +29,7 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ className = "" }) => {
     sendWhatsAppMessage(message)
   }
 
-  const handleCallClick = () => {
-    window.open("tel:+573001234567", "_self")
-  }
+
 
   return (
     <div className={`fixed bottom-6 right-6 z-50 ${className}`}>
@@ -47,7 +45,7 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ className = "" }) => {
             {/* Close Button */}
             <button
               onClick={() => setIsExpanded(false)}
-              className="absolute top-3 right-3 text-graphite-gray/60 hover:text-graphite-gray transition-colors"
+              className="absolute top-3 right-3 text-graphite-gray/60 hover:text-graphite-gray transition-colors cursor-pointer"
               aria-label="Cerrar chat de WhatsApp"
               style={{ color: '#333333' }}
             >
@@ -79,7 +77,7 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ className = "" }) => {
             <div className="space-y-3">
               <button
                 onClick={handleWhatsAppClick}
-                className="w-full bg-[#25D366] hover:bg-[#1ea952] text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-300 flex items-center justify-center space-x-2"
+                className="w-full bg-[#25D366] hover:bg-[#1ea952] text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-300 flex items-center justify-center space-x-2 cursor-pointer"
               >
                 <WhatsAppIcon className="w-5 h-5" />
                 <span>Escribir por WhatsApp</span>
@@ -101,7 +99,7 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({ className = "" }) => {
         onClick={() => setIsExpanded(!isExpanded)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="w-16 h-16 bg-[#25D366] hover:bg-[#1ea952] rounded-full shadow-2xl flex items-center justify-center transition-colors duration-300"
+        className="w-16 h-16 bg-[#25D366] hover:bg-[#1ea952] rounded-full shadow-2xl flex items-center justify-center transition-colors duration-300 cursor-pointer"
       >
         <AnimatePresence mode="wait">
           {isExpanded ? (

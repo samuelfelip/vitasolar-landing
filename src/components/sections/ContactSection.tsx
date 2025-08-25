@@ -76,7 +76,7 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
 
 ¡Contactar lo antes posible! 🚀`
 
-      const whatsappLink = generateWhatsAppLink("+57 300 123 4567", message)
+      const whatsappLink = generateWhatsAppLink("+57 300 344 0025", message)
       window.open(whatsappLink, "_blank")
       
       setIsSubmitted(true)
@@ -183,24 +183,30 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                 <h3 className="text-xl sm:text-2xl font-bold mb-4 lg:mb-6">Contáctanos</h3>
                 <div className="space-y-3 lg:space-y-4">
                   {/* Contact items with responsive spacing */}
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                  <button 
+                    onClick={() => window.open(generateWhatsAppLink("+57 300 344 0025", "¡Hola! Me interesa obtener información sobre paneles solares VitaSolar 🌞"), "_blank")}
+                    className="flex items-center space-x-3 w-full text-left hover:bg-white/10 rounded-lg p-2 transition-colors duration-200 group cursor-pointer"
+                  >
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
                       <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </div>
                     <div>
-                      <div className="font-medium text-sm sm:text-base">WhatsApp</div>
-                      <div className="text-white/80 text-sm sm:text-base">+57 300 123 4567</div>
+                      <div className="font-medium text-sm sm:text-base group-hover:text-green-200 transition-colors">WhatsApp</div>
+                      <div className="text-white/80 text-sm sm:text-base group-hover:text-white transition-colors">+57 300 344 0025</div>
                     </div>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                  </button>
+                  <button 
+                    onClick={() => window.open("mailto:contacto@vitasolar.com.co?subject=Consulta sobre paneles solares VitaSolar&body=Hola, me interesa obtener más información sobre sus servicios de energía solar.", "_blank")}
+                    className="flex items-center space-x-3 w-full text-left hover:bg-white/10 rounded-lg p-2 transition-colors duration-200 group cursor-pointer"
+                  >
+                    <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
                       <Mail className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <div className="font-medium">Email</div>
-                      <div className="text-white/80">contacto@vitasolar.com.co</div>
+                      <div className="font-medium group-hover:text-blue-200 transition-colors">Email</div>
+                      <div className="text-white/80 group-hover:text-white transition-colors">contacto@vitasolar.com.co</div>
                     </div>
-                  </div>
+                  </button>
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg">
                       <MapPin className="w-5 h-5 text-white" />
@@ -304,7 +310,7 @@ ${data.message ? `💬 Mensaje: ${data.message}` : ''}
                               key={city}
                               type="button"
                               onClick={() => handleCitySelect(city)}
-                              className="w-full px-4 py-2 text-left text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                              className="w-full px-4 py-2 text-left text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none cursor-pointer"
                             >
                               {city}
                             </button>

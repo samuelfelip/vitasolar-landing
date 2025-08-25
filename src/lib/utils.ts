@@ -70,7 +70,24 @@ export function generateWhatsAppLink(number: string, message: string): string {
   return `https://wa.me/${formattedNumber.replace('+', '')}?text=${encodedMessage}`
 }
 
-export function sendWhatsAppMessage(message: string, number: string = '+573001234567'): void {
+export function sendWhatsAppMessage(message: string, number: string = '+573003440025'): void {
   const whatsappLink = generateWhatsAppLink(number, message)
   window.open(whatsappLink, '_blank')
+}
+
+// Privacy Policy Utilities
+export function hasAcceptedPrivacyPolicy(): boolean {
+  if (typeof window === 'undefined') return true // SSR
+  return localStorage.getItem("vitasolar-privacy-accepted") === "true"
+}
+
+export function resetPrivacyPolicy(): void {
+  if (typeof window === 'undefined') return // SSR
+  localStorage.removeItem("vitasolar-privacy-accepted")
+  localStorage.removeItem("vitasolar-privacy-date")
+}
+
+export function getPrivacyPolicyAcceptanceDate(): string | null {
+  if (typeof window === 'undefined') return null // SSR
+  return localStorage.getItem("vitasolar-privacy-date")
 } 

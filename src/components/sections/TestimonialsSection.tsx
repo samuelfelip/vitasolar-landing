@@ -239,14 +239,14 @@ const TestimonialsSection = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button 
-                  onClick={() => window.open('https://wa.me/573001234567?text=¡Hola! Quiero mi cotización gratuita de paneles solares después de ver los testimonios. ¿Cuánto puedo ahorrar?', '_blank')}
-                  className="px-8 py-4 bg-solar-gradient text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
+                  onClick={() => window.open('https://wa.me/573003440025?text=¡Hola! Quiero mi cotización gratuita de paneles solares después de ver los testimonios. ¿Cuánto puedo ahorrar?', '_blank')}
+                  className="px-8 py-4 bg-solar-gradient text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
                 >
                   Obtener cotización gratuita
                 </button>
                 <button
                   onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="px-8 py-4 bg-white text-graphite-gray font-semibold rounded-xl border-2 border-graphite-gray hover:bg-graphite-gray hover:text-white transition-all duration-300"
+                  className="px-8 py-4 bg-white text-graphite-gray font-semibold rounded-xl border-2 border-graphite-gray hover:bg-graphite-gray hover:text-white transition-all duration-300 cursor-pointer"
                 >
                   Solicitar información
                 </button>

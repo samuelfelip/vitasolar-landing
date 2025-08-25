@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import PrivacyPolicyPopup from "@/components/ui/PrivacyPolicyPopup"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -31,41 +32,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      {
-        url: '/favicon.svg',
-        type: 'image/svg+xml',
-      },
-      {
-        url: '/images/logo/vitasolar_logo.png',
-        sizes: '32x32',
-        type: 'image/png',
-      },
-      {
-        url: '/images/logo/vitasolar_logo.png',
-        sizes: '16x16',
-        type: 'image/png',
-      },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/images/logo/vitasolar_logo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/images/logo/vitasolar_logo.png', sizes: '16x16', type: 'image/png' }
     ],
-    apple: [
-      {
-        url: '/images/logo/vitasolar_logo.png',
-        sizes: '180x180',
-        type: 'image/png',
-      },
-    ],
-    other: [
-      {
-        rel: 'icon',
-        url: '/favicon.svg',
-        type: 'image/svg+xml',
-      },
-      {
-        rel: 'icon',
-        url: '/images/logo/vitasolar_logo.png',
-        sizes: '192x192',
-        type: 'image/png',
-      },
-    ],
+    apple: '/images/logo/vitasolar_logo.png',
   },
   metadataBase: new URL('https://vitasolar.com.co'),
   alternates: {
@@ -128,10 +99,9 @@ export default function RootLayout({
     <html lang="es-CO">
       <head>
         {/* Favicon */}
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/images/logo/vitasolar_logo.png" sizes="any" />
-        <link rel="icon" href="/images/logo/vitasolar_logo.png" type="image/png" />
+        {/* eslint-disable-next-line @next/next/no-head-element */}
         <link rel="apple-touch-icon" href="/images/logo/vitasolar_logo.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         
         {/* Additional SEO tags */}
         <link rel="canonical" href="https://vitasolar.com.co/" />
@@ -158,7 +128,7 @@ export default function RootLayout({
                 "postalCode": "110111",
                 "addressCountry": "CO"
               },
-              "telephone": "+573001234567",
+              "telephone": "+573003440025",
               "url": "https://vitasolar.com.co",
               "sameAs": [
                 "https://www.facebook.com/VitaSolarCO",
@@ -280,6 +250,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         {children}
+        <PrivacyPolicyPopup />
       </body>
     </html>
   )

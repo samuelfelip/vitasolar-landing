@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
 import Container from "@/components/layout/Container"
 import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 
@@ -82,28 +83,48 @@ const ImageCarousel = () => {
   }
 
   return (
-    <section id="carrusel" className="relative h-[600px] md:h-[700px] overflow-hidden bg-graphite-gray">
+    <section id="carrusel" className="relative h-[600px] md:h-[700px] overflow-hidden bg-black">
       <div className="absolute inset-0">
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false}>
           <motion.div
             key={currentIndex}
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
+            initial={{ scale: 1.05, opacity: 0, x: 100 }}
+            animate={{ scale: 1, opacity: 1, x: 0 }}
+            exit={{ scale: 1.05, opacity: 0, x: -100 }}
+            transition={{ 
+              duration: 0.8, 
+              ease: [0.25, 0.46, 0.45, 0.94],
+              opacity: { duration: 0.4 }
+            }}
             className="absolute inset-0"
           >
-            {/* Background Image with Parallax Effect */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url('${carouselImages[currentIndex].src}')`,
-                transform: 'scale(1.1)'
-              }}
-            />
+            {/* Background Image with Enhanced Parallax Effect */}
+            <div className="absolute inset-0 overflow-hidden">
+              <motion.div
+                className="w-full h-full"
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1.05 }}
+                transition={{ duration: 10, ease: "easeOut" }}
+              >
+                <Image
+                  src={carouselImages[currentIndex].src}
+                  alt={carouselImages[currentIndex].alt}
+                  fill
+                  className="object-cover"
+                  priority={currentIndex === 0}
+                  sizes="100vw"
+                  quality={85}
+                />
+              </motion.div>
+            </div>
             
-            {/* Gradient Overlay */}
-            <div className={`absolute inset-0 ${carouselImages[currentIndex].overlay}`} />
+            {/* Gradient Overlay with Animation */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className={`absolute inset-0 ${carouselImages[currentIndex].overlay}`} 
+            />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -113,17 +134,33 @@ const ImageCarousel = () => {
         <div className="flex items-center justify-center h-full text-center text-white">
           <motion.div
             key={`content-${currentIndex}`}
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            initial={{ y: 80, opacity: 0, scale: 0.9 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: -50, opacity: 0, scale: 1.1 }}
+            transition={{ 
+              type: "spring",
+              damping: 25,
+              stiffness: 120,
+              delay: 0.4
+            }}
             className="max-w-4xl w-full mx-4"
           >
-            <div className="bg-black/25 backdrop-blur-[1px] p-8 rounded-2xl">
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="bg-black/30 backdrop-blur-md p-8 rounded-2xl border border-white/10"
+            >
               <motion.h2 
                 className="text-4xl md:text-6xl font-bold mb-6"
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                initial={{ y: 40, opacity: 0, rotateX: -20 }}
+                animate={{ y: 0, opacity: 1, rotateX: 0 }}
+                transition={{ 
+                  type: "spring",
+                  damping: 20,
+                  stiffness: 100,
+                  delay: 0.7
+                }}
               >
                 {carouselImages[currentIndex].title}
               </motion.h2>
@@ -131,48 +168,78 @@ const ImageCarousel = () => {
                 className="text-xl md:text-2xl mb-8 opacity-90"
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
+                transition={{ 
+                  type: "spring",
+                  damping: 25,
+                  stiffness: 120,
+                  delay: 0.9
+                }}
               >
                 {carouselImages[currentIndex].subtitle}
               </motion.p>
               <motion.div
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.9 }}
+                initial={{ y: 40, opacity: 0, scale: 0.9 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                transition={{ 
+                  type: "spring",
+                  damping: 20,
+                  stiffness: 100,
+                  delay: 1.1
+                }}
                 className="flex flex-col sm:flex-row gap-4 justify-center"
               >
-                <button 
+                <motion.button 
                   onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="px-8 py-4 bg-nature-green text-white font-bold text-lg rounded-xl hover:bg-solar-yellow transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="px-8 py-4 bg-nature-green text-white font-bold text-lg rounded-xl shadow-lg relative overflow-hidden group cursor-pointer"
                   style={{ backgroundColor: '#43A047' }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = '#FFD600'
-                    e.currentTarget.style.color = '#43A047'
+                  whileHover={{ 
+                    scale: 1.05,
+                    y: -2,
+                    transition: { type: "spring", stiffness: 300, damping: 20 }
                   }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#43A047'
-                    e.currentTarget.style.color = 'white'
+                  whileTap={{ 
+                    scale: 0.98,
+                    transition: { type: "spring", stiffness: 300, damping: 20 }
                   }}
                 >
-                  Cotizar ahora
-                </button>
-                <button 
+                  <motion.div
+                    className="absolute inset-0 bg-solar-yellow"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "0%" }}
+                    transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                  />
+                  <span className="relative z-10 group-hover:text-nature-green transition-colors duration-300">
+                    Cotizar ahora
+                  </span>
+                </motion.button>
+                <motion.button 
                   onClick={() => document.getElementById('calculadora')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-xl hover:bg-white hover:text-nature-green transition-all duration-300 hover:scale-105"
-                  style={{ borderColor: 'white' }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'white'
-                    e.currentTarget.style.color = '#43A047'
+                  className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg rounded-xl relative overflow-hidden group cursor-pointer"
+                  whileHover={{ 
+                    scale: 1.05,
+                    y: -2,
+                    transition: { type: "spring", stiffness: 300, damping: 20 }
                   }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.color = 'white'
+                  whileTap={{ 
+                    scale: 0.98,
+                    transition: { type: "spring", stiffness: 300, damping: 20 }
                   }}
                 >
-                  Calcular ahorro
-                </button>
+                  <motion.div
+                    className="absolute inset-0 bg-white"
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileHover={{ 
+                      scale: 1, 
+                      opacity: 1,
+                      transition: { type: "spring", stiffness: 200, damping: 15 }
+                    }}
+                  />
+                  <span className="relative z-10 group-hover:text-nature-green transition-colors duration-300">
+                    Calcular ahorro
+                  </span>
+                </motion.button>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </Container>
@@ -181,7 +248,7 @@ const ImageCarousel = () => {
       <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-20">
         <button
           onClick={goToPrevious}
-          className="p-3 bg-white/20 hover:bg-white/30 rounded-full text-white backdrop-blur-[1px] transition-all duration-300 hover:scale-110"
+          className="p-3 bg-white/20 hover:bg-white/30 rounded-full text-white backdrop-blur-[1px] transition-all duration-300 hover:scale-110 cursor-pointer"
           aria-label="Imagen anterior"
         >
           <ChevronLeft className="w-6 h-6" />
@@ -191,7 +258,7 @@ const ImageCarousel = () => {
       <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-20">
         <button
           onClick={goToNext}
-          className="p-3 bg-white/20 hover:bg-white/30 rounded-full text-white backdrop-blur-[1px] transition-all duration-300 hover:scale-110"
+          className="p-3 bg-white/20 hover:bg-white/30 rounded-full text-white backdrop-blur-[1px] transition-all duration-300 hover:scale-110 cursor-pointer"
           aria-label="Siguiente imagen"
         >
           <ChevronRight className="w-6 h-6" />
@@ -205,7 +272,7 @@ const ImageCarousel = () => {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
                 index === currentIndex 
                   ? 'bg-solar-yellow scale-125' 
                   : 'bg-white/50 hover:bg-white/70'
@@ -220,7 +287,7 @@ const ImageCarousel = () => {
       <div className="absolute bottom-8 right-8 z-20">
         <button
           onClick={toggleAutoPlay}
-          className={`p-3 rounded-full backdrop-blur-[1px] transition-all duration-300 hover:scale-110 ${
+          className={`p-3 rounded-full backdrop-blur-[1px] transition-all duration-300 hover:scale-110 cursor-pointer ${
             isAutoPlay 
               ? 'bg-solar-yellow/80 text-graphite-gray' 
               : 'bg-white/20 text-white'

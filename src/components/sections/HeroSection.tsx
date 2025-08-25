@@ -25,7 +25,7 @@ const HeroSection = () => {
   const handleQuoteSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const message = `Hola, soy ${formData.name} de ${formData.city}. Mi WhatsApp es ${formData.whatsapp} y pago aproximadamente ${formData.monthlyBill} de energía al mes. Quiero una cotización para paneles solares.`
-    const whatsappLink = generateWhatsAppLink("+57 300 123 4567", message)
+    const whatsappLink = generateWhatsAppLink("+57 300 344 0025", message)
     window.open(whatsappLink, "_blank")
   }
 
@@ -53,7 +53,7 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-6 justify-center lg:justify-start">
               <button
                 onClick={() => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-6 py-3 bg-nature-green text-white font-bold rounded-xl hover:bg-solar-yellow transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                className="px-6 py-3 bg-nature-green text-white font-bold rounded-xl hover:bg-solar-yellow transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer"
                 style={{ backgroundColor: '#43A047' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = '#FFD600'
@@ -68,7 +68,7 @@ const HeroSection = () => {
               </button>
               <button
                 onClick={() => document.getElementById('proceso')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-6 py-3 bg-white text-nature-green font-bold rounded-xl border-2 border-nature-green hover:bg-nature-green hover:text-white transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                className="px-6 py-3 bg-white text-nature-green font-bold rounded-xl border-2 border-nature-green hover:bg-nature-green hover:text-white transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer"
                 style={{ borderColor: '#43A047', color: '#43A047' }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = '#43A047'
@@ -178,7 +178,7 @@ const HeroSection = () => {
 
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 bg-nature-green text-white font-bold rounded-xl hover:bg-solar-yellow transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="w-full px-6 py-3 bg-nature-green text-white font-bold rounded-xl hover:bg-solar-yellow transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer"
                   style={{ backgroundColor: '#43A047' }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = '#FFD600'

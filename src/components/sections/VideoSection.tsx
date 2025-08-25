@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from "react"
 import { Play, Pause, Volume2, VolumeX, Maximize, Minimize } from "lucide-react"
-import Container from "@/components/layout/Container"
 import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
 
 const VideoSection = () => {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -71,24 +71,24 @@ const VideoSection = () => {
       // Exit fullscreen
       if (document.exitFullscreen) {
         document.exitFullscreen()
-      } else if ((document as any).webkitExitFullscreen) {
-        (document as any).webkitExitFullscreen()
-      } else if ((document as any).mozCancelFullScreen) {
-        (document as any).mozCancelFullScreen()
-      } else if ((document as any).msExitFullscreen) {
-        (document as any).msExitFullscreen()
+      } else if ((document as unknown as { webkitExitFullscreen?: () => void }).webkitExitFullscreen) {
+        (document as unknown as { webkitExitFullscreen: () => void }).webkitExitFullscreen()
+      } else if ((document as unknown as { mozCancelFullScreen?: () => void }).mozCancelFullScreen) {
+        (document as unknown as { mozCancelFullScreen: () => void }).mozCancelFullScreen()
+      } else if ((document as unknown as { msExitFullscreen?: () => void }).msExitFullscreen) {
+        (document as unknown as { msExitFullscreen: () => void }).msExitFullscreen()
       }
     } else {
       // Enter fullscreen
       if (videoRef.current) {
         if (videoRef.current.requestFullscreen) {
           videoRef.current.requestFullscreen()
-        } else if ((videoRef.current as any).webkitRequestFullscreen) {
+        } else if ((videoRef.current as unknown as { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen) {
           // Safari
-          (videoRef.current as any).webkitRequestFullscreen()
-        } else if ((videoRef.current as any).msRequestFullscreen) {
+          (videoRef.current as unknown as { webkitRequestFullscreen: () => void }).webkitRequestFullscreen()
+        } else if ((videoRef.current as unknown as { msRequestFullscreen?: () => void }).msRequestFullscreen) {
           // IE/Edge
-          (videoRef.current as any).msRequestFullscreen()
+          (videoRef.current as unknown as { msRequestFullscreen: () => void }).msRequestFullscreen()
         }
       }
     }
@@ -164,12 +164,15 @@ const VideoSection = () => {
             {/* Video Preview Image */}
             {!isPlaying && (
               <div className="absolute inset-0 z-10">
-                <div 
-                  className="w-full h-full bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: "url('/images/video-preview/video preview.png')" }}
+                <Image
+                  src="/images/video-preview/video preview.png"
+                  alt="Vista previa del video de VitaSolar"
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                  quality={85}
+                  priority
                 />
-                
-
               </div>
             )}
 
@@ -181,11 +184,13 @@ const VideoSection = () => {
               onPlay={handleVideoPlay}
               onPause={handleVideoPause}
               onError={handleVideoError}
-              preload="metadata"
+              preload="none"
+              playsInline
+              muted={isMuted}
             >
               <source src="/videos/landing.mp4" type="video/mp4" />
               Tu navegador no soporta el elemento de video.
-                            </video>
+            </video>
 
             {/* Play Button Overlay */}
             <AnimatePresence>
@@ -199,7 +204,7 @@ const VideoSection = () => {
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-24 h-24 md:w-32 md:h-32 bg-solar-yellow rounded-full flex items-center justify-center shadow-2xl hover:bg-white transition-all duration-300 group relative overflow-hidden"
+                    className="w-24 h-24 md:w-32 md:h-32 bg-solar-yellow rounded-full flex items-center justify-center shadow-2xl hover:bg-white transition-all duration-300 group relative overflow-hidden cursor-pointer"
                     onClick={handleVideoClick}
                     disabled={isLoading}
                     onMouseEnter={() => setIsPlayButtonHovered(true)}
@@ -228,9 +233,11 @@ const VideoSection = () => {
                       transition={{ duration: 0.3 }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      <img
+                      <Image
                         src="/images/logo/vitasolar_logo.png"
                         alt="VitaSolar"
+                        width={64}
+                        height={64}
                         className="w-12 h-12 md:w-16 md:h-16 object-contain"
                       />
                     </motion.div>
@@ -256,7 +263,7 @@ const VideoSection = () => {
                           await handlePlayPause()
                         }}
                         disabled={isLoading}
-                        className="p-2 bg-solar-yellow rounded-full hover:bg-white transition-colors duration-300 group"
+                        className="p-2 bg-solar-yellow rounded-full hover:bg-white transition-colors duration-300 group cursor-pointer"
                       >
                         {isPlaying ? (
                           <Pause className="w-5 h-5 text-graphite-gray group-hover:text-solar-yellow" />
@@ -270,7 +277,7 @@ const VideoSection = () => {
                           e.stopPropagation()
                           handleMuteToggle()
                         }}
-                        className="p-2 text-white hover:text-solar-yellow transition-colors duration-300"
+                        className="p-2 text-white hover:text-solar-yellow transition-colors duration-300 cursor-pointer"
                       >
                         {isMuted ? (
                           <VolumeX className="w-5 h-5" />
@@ -285,7 +292,7 @@ const VideoSection = () => {
                         e.stopPropagation()
                         handleFullscreen()
                       }}
-                      className="p-2 text-white hover:text-solar-yellow transition-colors duration-300"
+                      className="p-2 text-white hover:text-solar-yellow transition-colors duration-300 cursor-pointer"
                       aria-label="Pantalla completa"
                     >
                       {isFullscreen ? (

@@ -20,6 +20,7 @@ const partners = [
     certifications: [
       "Certificación RETIE",
       "ISO 9001:2015",
+      "ISO 14001:2015",
       "Técnicos certificados",
       "Garantía extendida"
     ],
@@ -27,10 +28,41 @@ const partners = [
     rating: 4.9,
     completedProjects: 1200,
     highlights: [
-      "Instalaciones en tiempo récord",
+      "Instalación en 1-3 días",
+      "Trámites legales 2-6 meses máximo",
       "Garantía de 25 años en paneles",
       "Equipos de última tecnología",
       "100% de proyectos exitosos"
+    ],
+    partnerBrands: [
+      {
+        name: "Fronius",
+        logo: "/images/Logos marcas aliadas solvitech/Fronius-logo.png"
+      },
+      {
+        name: "GCL Poly",
+        logo: "/images/Logos marcas aliadas solvitech/GCL-Poly-Logo.wine.png"
+      },
+      {
+        name: "GoodWe",
+        logo: "/images/Logos marcas aliadas solvitech/goodwe-356237.webp"
+      },
+      {
+        name: "Growatt",
+        logo: "/images/Logos marcas aliadas solvitech/Growatt-logo-new-GB (1).webp"
+      },
+      {
+        name: "Huawei",
+        logo: "/images/Logos marcas aliadas solvitech/Huawei_Standard_logo.svg.png"
+      },
+      {
+        name: "JA Solar",
+        logo: "/images/Logos marcas aliadas solvitech/JA-Solar-600x300-1.PNG"
+      },
+      {
+        name: "Jinko Solar",
+        logo: "/images/Logos marcas aliadas solvitech/jinko-logo2.webp"
+      }
     ]
   }
 ]
@@ -38,23 +70,23 @@ const partners = [
 const certifications = [
   {
     icon: Award,
-    title: "Certificaciones Técnicas",
-    description: "Todos nuestros aliados cuentan con certificaciones RETIE y estándares internacionales"
+    title: "ISO 9001:2015",
+    description: "Certificación de gestión de calidad para garantizar procesos estandarizados"
   },
   {
     icon: Award,
-    title: "Garantía Extendida",
-    description: "25 años de garantía en paneles y 10 años en inversores con nuestros aliados"
+    title: "ISO 14001:2015",
+    description: "Certificación de gestión ambiental para instalaciones sostenibles y responsables"
   },
   {
     icon: CheckCircle,
-    title: "Instalación Profesional",
-    description: "Técnicos especializados con experiencia en sistemas solares residenciales y comerciales"
+    title: "Instalación Rápida",
+    description: "Instalación profesional completada en 1-3 días con técnicos especializados"
   },
   {
     icon: CheckCircle,
-    title: "Soporte Continuo",
-    description: "Acompañamiento y mantenimiento durante toda la vida útil de tu sistema solar"
+    title: "Trámites Ágiles",
+    description: "Gestión completa de trámites legales en máximo 2-6 meses"
   }
 ]
 
@@ -237,7 +269,7 @@ const PartnersSection = () => {
               <h3 className="text-xl font-medium text-white mb-6 text-center">
                 Instalación con los más altos estándares
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
                 <div>
                   <div className="text-lg font-medium text-white">RETIE</div>
                   <div className="text-sm text-white/80">Certificación obligatoria</div>
@@ -247,9 +279,53 @@ const PartnersSection = () => {
                   <div className="text-sm text-white/80">Gestión de calidad</div>
                 </div>
                 <div>
+                  <div className="text-lg font-medium text-white">ISO 14001</div>
+                  <div className="text-sm text-white/80">Gestión ambiental</div>
+                </div>
+                <div>
                   <div className="text-lg font-medium text-white">25 años</div>
                   <div className="text-sm text-white/80">Garantía total</div>
                 </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Partner Brands Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mb-16"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 text-center mb-12">
+              Marcas aliadas de Solvitech
+            </h3>
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center">
+                {partners[0].partnerBrands.map((brand, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="flex items-center justify-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors duration-300"
+                  >
+                    <Image
+                      src={brand.logo}
+                      alt={`${brand.name} Logo`}
+                      width={120}
+                      height={80}
+                      className="max-h-12 w-auto object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+              <div className="text-center mt-6">
+                <p className="text-gray-600 text-sm">
+                  Trabajamos con las mejores marcas del mercado para garantizar equipos de máxima calidad y eficiencia
+                </p>
               </div>
             </div>
           </motion.div>
